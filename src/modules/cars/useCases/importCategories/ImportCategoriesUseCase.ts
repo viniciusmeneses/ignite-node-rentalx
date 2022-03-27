@@ -33,7 +33,10 @@ export class ImportCategoriesUseCase {
       parser.on("data", ([name, description]) =>
         categories.push({ name, description })
       );
-      parser.on("end", () => resolve(categories));
+      parser.on("end", () => {
+        fs.promises.unlink(file.path);
+        resolve(categories);
+      });
       parser.on("error", reject);
     });
   }
