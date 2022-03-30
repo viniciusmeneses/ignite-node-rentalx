@@ -8,6 +8,7 @@ const dataSource = new DataSource({
   password: "ignite",
   database: "rentalx",
   migrations: ["./src/database/migrations/*.ts"],
+  entities: ["./src/modules/**/entities/*.ts"],
 });
 
 dataSource.initialize();
