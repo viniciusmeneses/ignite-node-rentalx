@@ -6,6 +6,6 @@ export interface ICreateSpecificationDTO {
 }
 
 export interface ISpecificationsRepostiory {
-  create(specification: ICreateSpecificationDTO): void;
-  findByName(name: string): Specification | undefined;
+  create(specification: ICreateSpecificationDTO): Promise<void>;
+  findByName(name: string): Promise<Specification | null>;
 }
