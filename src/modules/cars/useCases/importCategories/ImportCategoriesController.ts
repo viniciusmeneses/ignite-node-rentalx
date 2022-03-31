@@ -8,6 +8,6 @@ export class ImportCategoriesController {
     const { file } = req;
     const importCategoriesUseCase = container.resolve(ImportCategoriesUseCase);
     await importCategoriesUseCase.execute(file);
-    return res.sendStatus(200);
+    return res.sendStatus(201);
   }
 }
