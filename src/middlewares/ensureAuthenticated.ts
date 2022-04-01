@@ -9,7 +9,7 @@ type IPayload = { sub: string };
 
 export const ensureAuthenticated = async (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
@@ -23,8 +23,10 @@ export const ensureAuthenticated = async (
     const usersRepository =
       container.resolve<IUsersRepository>("UsersRepository");
 
-    const user = usersRepository.findById(userId);
+    const user = await usersRepository.findById(userId);
     if (!user) throw new AppError("User doesn't exists", 401);
+
+    req.user = user;
 
     next();
   } catch {
