@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express";
 import swaggerUI from "swagger-ui-express";
 import "reflect-metadata";
@@ -9,6 +10,7 @@ import "./shared/container";
 
 import "./database";
 
+dotenv.config();
 const app = express();
 
 app.use(express.json());
