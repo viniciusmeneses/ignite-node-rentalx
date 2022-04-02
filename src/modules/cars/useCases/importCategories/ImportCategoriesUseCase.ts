@@ -1,5 +1,6 @@
 import { parse } from "csv-parse";
 import fs from "fs";
+import fsAsync from "fs/promises";
 import { inject, injectable } from "tsyringe";
 
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
@@ -41,7 +42,7 @@ export class ImportCategoriesUseCase {
         categories.push({ name, description })
       );
       parser.on("end", () => {
-        fs.promises.unlink(file.path);
+        fsAsync.unlink(file.path);
         resolve(categories);
       });
       parser.on("error", reject);
