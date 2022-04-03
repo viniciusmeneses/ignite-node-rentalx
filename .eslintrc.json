@@ -47,13 +47,13 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+        "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ],
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/*.spec.js"] }
+      { "devDependencies": ["**/*.spec.js", "jest.config.ts"] }
     ],
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],

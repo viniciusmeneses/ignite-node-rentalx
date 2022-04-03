@@ -4,8 +4,9 @@ import swaggerUI from "swagger-ui-express";
 import "reflect-metadata";
 import "express-async-errors";
 
+import { AppError } from "@shared/errors/AppError";
+
 import swaggerFile from "../../../swagger.json";
-import { AppError } from "../../errors/AppError";
 import { router } from "./routes";
 
 import "../../container";
