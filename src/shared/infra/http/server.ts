@@ -4,13 +4,13 @@ import swaggerUI from "swagger-ui-express";
 import "reflect-metadata";
 import "express-async-errors";
 
-import { AppError } from "./errors/AppError";
+import swaggerFile from "../../../swagger.json";
+import { AppError } from "../../errors/AppError";
 import { router } from "./routes";
-import swaggerFile from "./swagger.json";
 
-import "./shared/container";
+import "../../container";
 
-import "./database";
+import "../typeorm";
 
 dotenv.config();
 const app = express();

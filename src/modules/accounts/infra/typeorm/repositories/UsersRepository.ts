@@ -1,10 +1,10 @@
 import { Repository } from "typeorm";
 
-import { dataSource } from "../../../../database";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { IUpdateUserDTO } from "../../dtos/IUpdateUserDTO";
-import { User } from "../../entities/User";
-import { IUsersRepository } from "../IUsersRepository";
+import { dataSource } from "../../../../../shared/infra/typeorm";
+import { ICreateUserDTO } from "../../../dtos/ICreateUserDTO";
+import { IUpdateUserDTO } from "../../../dtos/IUpdateUserDTO";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
+import { User } from "../entities/User";
 
 export class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;

@@ -1,13 +1,13 @@
 import { Repository } from "typeorm";
 
-import { dataSource } from "../../../../database";
-import { Category } from "../../entities/Category";
+import { dataSource } from "../../../../../shared/infra/typeorm";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from "../ICategoriesRepository";
+} from "../../../repositories/ICategoriesRepository";
+import { Category } from "../entities/Category";
 
-class CategoriesRepository implements ICategoriesRepository {
+export class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
   constructor() {
@@ -31,5 +31,3 @@ class CategoriesRepository implements ICategoriesRepository {
     return this.repository.findOne({ where: { name } });
   }
 }
-
-export { CategoriesRepository };
