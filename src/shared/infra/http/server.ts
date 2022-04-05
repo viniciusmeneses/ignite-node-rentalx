@@ -1,19 +1,17 @@
-import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import swaggerUI from "swagger-ui-express";
 import "reflect-metadata";
 import "express-async-errors";
+import "dotenv/config";
 
 import { AppError } from "@shared/errors/AppError";
 
 import swaggerFile from "../../../swagger.json";
+import { dataSource } from "../typeorm";
 import { router } from "./routes";
 
 import "../../container";
 
-import "../typeorm";
-
-dotenv.config();
 const app = express();
 
 app.use(express.json());
@@ -29,4 +27,8 @@ app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
     .json({ message: `Internal server error - ${err.message}` });
 });
 
-app.listen(3333, () => console.log("Server started on port 3333"));
+dataSource
+  .initialize()
+  .then(() =>
+    app.listen(3333, () => console.log("Server started on port 3333"))
+  );
