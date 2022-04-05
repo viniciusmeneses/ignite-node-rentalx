@@ -39,4 +39,17 @@ export class CarsRepository implements ICarsRepository {
   async findByLicensePlate(license_plate: string): Promise<Car | null> {
     return this.repository.findOneBy({ license_plate });
   }
+
+  async findAvailable(
+    brand?: string,
+    category_id?: string,
+    name?: string
+  ): Promise<Car[]> {
+    return this.repository.findBy({
+      available: true,
+      brand,
+      category_id,
+      name,
+    });
+  }
 }
