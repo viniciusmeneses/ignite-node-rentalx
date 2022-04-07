@@ -6,7 +6,7 @@ export const dataSource = new DataSource({
   port: 5432,
   username: "docker",
   password: "ignite",
-  database: "rentalx",
+  database: process.env.NODE_ENV === "test" ? "rentalx_test" : "rentalx",
   migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
   entities: ["./src/modules/**/entities/*.ts"],
 });

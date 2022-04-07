@@ -1,8 +1,9 @@
-import { pathsToModuleNameMapper } from "ts-jest/utils";
+import { pathsToModuleNameMapper } from "ts-jest";
 
 import { compilerOptions } from "./tsconfig.json";
 
 export default {
+  bail: true,
   clearMocks: true,
   coverageProvider: "v8",
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
