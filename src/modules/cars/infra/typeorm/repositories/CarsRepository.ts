@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
+import { IUpdateCarDTO } from "@modules/cars/dtos/IUpdateCarDTO";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { dataSource } from "@shared/infra/typeorm";
 
@@ -14,6 +15,29 @@ export class CarsRepository implements ICarsRepository {
   }
 
   async create({
+    name,
+    description,
+    fine_amount,
+    license_plate,
+    daily_rate,
+    brand,
+    category_id,
+  }: ICreateCarDTO): Promise<Car> {
+    const car = this.repository.create({
+      name,
+      description,
+      fine_amount,
+      license_plate,
+      daily_rate,
+      brand,
+      category_id,
+    });
+
+    this.repository.save(car);
+    return car;
+  }
+
+  async update({
     id,
     name,
     description,
@@ -23,9 +47,10 @@ export class CarsRepository implements ICarsRepository {
     brand,
     category_id,
     specifications,
-  }: ICreateCarDTO): Promise<Car> {
-    const car = this.repository.create({
-      id,
+  }: IUpdateCarDTO): Promise<Car> {
+    const car = await this.repository.findOneBy({ id });
+
+    this.repository.merge(car, {
       name,
       description,
       fine_amount,
@@ -36,8 +61,7 @@ export class CarsRepository implements ICarsRepository {
       specifications,
     });
 
-    this.repository.save(car);
-    return car;
+    return this.repository.save(car);
   }
 
   findById(id: string): Promise<Car> {

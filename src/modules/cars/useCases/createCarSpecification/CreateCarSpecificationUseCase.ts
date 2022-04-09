@@ -28,7 +28,7 @@ export class CreateCarSpecificationUseCase {
     );
 
     carExists.specifications = specifications;
-    await this.carsRepository.create(carExists);
+    await this.carsRepository.update(carExists);
 
     return carExists;
   }
