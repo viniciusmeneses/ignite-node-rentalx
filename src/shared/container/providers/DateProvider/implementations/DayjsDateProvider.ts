@@ -16,6 +16,10 @@ export class DayjsDateProvider implements IDateProvider {
     return dayjs(end_date_utc).diff(start_date_utc, "hours");
   }
 
+  addDays(days: number): Date {
+    return dayjs().add(days, "day").toDate();
+  }
+
   private convertToUTC(date: Date): string {
     return dayjs(date).utc().local().format();
   }
