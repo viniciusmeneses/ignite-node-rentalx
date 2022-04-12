@@ -1,9 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
-import { container } from "tsyringe";
 
 import auth from "@config/auth";
-import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { AppError } from "@shared/errors/AppError";
 
 type IPayload = { sub: string };
@@ -20,19 +18,7 @@ export const ensureAuthenticated = async (
 
   try {
     const { sub: userId } = verify(token, auth.secret_token) as IPayload;
-
-    const usersTokensRepository = container.resolve<IUsersTokensRepository>(
-      "UsersTokensRepository"
-    );
-
-    const user = await usersTokensRepository.findByUserIdAndRefreshToken(
-      userId,
-      token
-    );
-    if (!user) throw new AppError("User doesn't exists", 401);
-
-    req.user = user;
-
+    req.user = { id: userId };
     next();
   } catch {
     throw new AppError("Invalid token", 401);
