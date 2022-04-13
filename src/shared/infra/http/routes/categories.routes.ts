@@ -9,7 +9,7 @@ import { ListCategoriesController } from "@modules/cars/useCases/listCategories/
 import { ensureAdmin } from "../middlewares/ensureAdmin";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
-const uploadCSV = multer(uploadConfig.upload("./tmp"));
+const uploadCSV = multer(uploadConfig);
 
 const createCategoryController = new CreateCategoryController();
 const importCategoriesController = new ImportCategoriesController();

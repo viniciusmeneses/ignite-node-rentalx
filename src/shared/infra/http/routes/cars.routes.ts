@@ -13,7 +13,7 @@ import { UploadCarImagesController } from "@modules/cars/useCases/uploadCarImage
 import { ensureAdmin } from "../middlewares/ensureAdmin";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
-const uploadImages = multer(uploadConfig.upload("./tmp/cars"));
+const uploadImages = multer(uploadConfig);
 
 const createCarController = new CreateCarController();
 const createCarSpecificationController = new CreateCarSpecificationController();

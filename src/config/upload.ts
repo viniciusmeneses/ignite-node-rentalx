@@ -1,16 +1,17 @@
 import crypto from "crypto";
-import { Options, diskStorage } from "multer";
+import { diskStorage } from "multer";
 import { resolve } from "path";
 
-const upload = (folder: string): Options => ({
+const tmpFolder = resolve(__dirname, "..", "..", "tmp");
+
+export default {
+  tmpFolder,
   storage: diskStorage({
-    destination: resolve(__dirname, "..", "..", folder),
+    destination: tmpFolder,
     filename: (_req, file, callback) => {
       const hash = crypto.randomBytes(16).toString("hex");
       const name = `${hash}-${file.originalname}`;
       return callback(null, name);
     },
   }),
-});
-
-export default { upload };
+};
