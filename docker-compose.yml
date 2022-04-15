@@ -13,18 +13,25 @@ services:
       - POSTGRES_DB=rentalx
     volumes:
       - pgdata:/data/postgres
-  app:
-    build: .
-    container_name: rentalx-app
+
+  redis:
+    image: redis:alpine
+    container_name: rentalx-redis
     ports:
-      - 3333:3333
-      - 9229:9229 # Debugger
-    volumes:
-      - .:/usr/app
-    links: 
-      - database
-    depends_on:
-      - database
+      - 6379:6379
+
+  # app:
+  #   build: .
+  #   container_name: rentalx-app
+  #   ports:
+  #     - 3333:3333
+  #     - 9229:9229 # Debugger
+  #   volumes:
+  #     - .:/usr/app
+  #   links:
+  #     - database
+  #   depends_on:
+  #     - database
 
 volumes:
   pgdata:

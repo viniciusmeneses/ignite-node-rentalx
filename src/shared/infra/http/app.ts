@@ -9,12 +9,14 @@ import upload from "@config/upload";
 import { AppError } from "@shared/errors/AppError";
 
 import swaggerFile from "../../../swagger.json";
+import { rateLimiter } from "./middlewares/rateLimiter";
 import { router } from "./routes";
 
 import "../../container";
 
 const app = express();
 
+app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 
