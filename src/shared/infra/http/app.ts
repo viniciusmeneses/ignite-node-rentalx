@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import swaggerUI from "swagger-ui-express";
 import "reflect-metadata";
@@ -14,6 +15,7 @@ import "../../container";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
